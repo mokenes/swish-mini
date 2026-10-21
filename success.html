@@ -1,194 +1,103 @@
+
 <!DOCTYPE html>
 <html lang="sv">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Swish – Demo</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Demo-bekräftelse</title>
 <style>
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #fff;
-  color: #171717;
-}
-
-.banner {
-  background: linear-gradient(120deg, #b7ef68, #389b4e);
-  color: white;
-  text-align: center;
-  padding: 45px 20px 55px;
-  border-radius: 0 0 35px 35px;
-}
-
-.demo-label {
-  font-size: 13px;
-  font-weight: bold;
-  letter-spacing: 1px;
-}
-
-.check {
-  font-size: 60px;
-  margin: 15px 0;
-}
-
-h1 {
-  font-size: 27px;
-  margin: 8px 0;
-}
-
-main {
-  max-width: 440px;
-  margin: auto;
-  padding: 24px;
-}
-
-.date {
-  text-align: center;
-  color: #888;
-  font-size: 14px;
-  margin: 10px 0 35px;
-}
-
-.amount {
-  text-align: center;
-  font-size: 42px;
-  font-weight: bold;
-  margin-bottom: 18px;
-}
-
-.demo-wait {
-  text-align: center;
-  margin: 0 0 35px;
-  padding: 18px 12px;
-  background: #f0f8ed;
-  border-radius: 14px;
-  color: #315c30;
-}
-
-.demo-wait strong {
-  display: block;
-  font-size: 20px;
-  font-weight: 800;
-}
-
-.demo-wait p {
-  font-size: 14px;
-  margin: 10px 0 0;
-}
-
-.row {
-  display: flex;
-  justify-content: space-between;
-  gap: 15px;
-  padding: 16px 0;
-  border-top: 1px solid #eee;
-  overflow-wrap: anywhere;
-}
-
-.row span:last-child {
-  text-align: right;
-  overflow-wrap: anywhere;
-}
-
-.notice {
-  background: #fff4d8;
-  color: #684900;
-  border-radius: 12px;
-  padding: 14px;
-  text-align: center;
-  font-weight: bold;
-  font-size: 13px;
-  margin-top: 28px;
-}
-
-button {
-  width: 100%;
-  margin-top: 18px;
-  padding: 15px;
-  background: #202820;
-  color: white;
-  border: 0;
-  border-radius: 12px;
-  font-size: 16px;
-  cursor: pointer;
-}
+*{box-sizing:border-box}
+body{margin:0;background:#f3f5f3;color:#202821;font-family:Arial,sans-serif;min-height:100vh;padding:20px}
+.page{max-width:430px;margin:0 auto;background:white;border-radius:25px;overflow:hidden;box-shadow:0 8px 35px #00000012}
+.hero{background:linear-gradient(140deg,#00bd70,#009b60);color:white;text-align:center;padding:27px 22px 43px;border-radius:0 0 48% 48% / 0 0 12% 12%}
+.brand{font-size:12px;letter-spacing:2px;font-weight:bold}
+.demo{font-size:10px;letter-spacing:2px;margin-top:6px;opacity:.9}
+.check{width:62px;height:62px;border:2px solid #ffffffc9;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:35px;margin:24px auto 15px}
+.hero h1{font-size:25px;margin:0 0 8px}
+.hero p{font-size:14px;margin:0;opacity:.94}
+.content{padding:25px 24px 24px}
+.date{text-align:center;color:#778078;font-size:12px;margin-bottom:20px}
+.amount{text-align:center;font-size:39px;font-weight:800;letter-spacing:-1px;margin:0}
+.currency{text-align:center;font-size:13px;color:#727c74;margin-top:5px}
+.arrival{background:#effaf3;border:1px solid #d6f0df;border-radius:15px;padding:17px;margin:24px 0}
+.arrival-title{color:#16834d;font-size:14px;font-weight:bold;margin-bottom:7px}
+.arrival p{color:#4b5a50;font-size:13px;line-height:1.5;margin:0}
+.details{border-top:1px solid #edf0ed}
+.detail{display:flex;justify-content:space-between;gap:16px;padding:16px 0;border-bottom:1px solid #edf0ed;font-size:13px}
+.key{color:#788178}
+.value{font-weight:600;text-align:right;overflow-wrap:anywhere;max-width:62%}
+.warning{margin-top:22px;padding:13px;border-radius:10px;background:#fff5d9;border:1px solid #f2df9b;color:#795d08;text-align:center;font-size:11px;font-weight:bold;line-height:1.5}
+.back{display:block;width:100%;padding:15px;margin-top:19px;border:0;border-radius:12px;background:#00ae68;color:white;font-size:15px;font-weight:bold;cursor:pointer}
+.back:hover{background:#00975a}
+.small{text-align:center;color:#8b948c;font-size:11px;margin-top:15px}
 </style>
 </head>
-
 <body>
-<div class="banner">
-  <div class="demo-label">SWISH</div>
-  <div class="check">✓</div>
-  <h1>Swish-bekräftelse</h1>
-  <p> betalning</p>
-</div>
+<main class="page">
+  <header class="hero">
+    <div class="brand">SWISH MINI · DEMO</div>
+    <div class="demo">SIMULERAD BETALNING</div>
+    <div class="check">✓</div>
+    <h1>Demo-bekräftelse</h1>
+    <p>Detta är en simulerad betalning</p>
+  </header>
 
-<main>
-  <p class="date" id="date"></p>
+  <section class="content">
+    <div class="date" id="date"></div>
+    <div class="amount" id="amount">0 kr</div>
+    <div class="currency">SEK · DEMO</div>
 
-  <div class="amount" id="amount">0 kr</div>
+    <div class="arrival">
+      <div class="arrival-title">DEMO: Simulerad överföring</div>
+      <p id="arrivalText">Detta är endast ett exempel. Ingen betalning har genomförts och inga pengar kommer att överföras.</p>
+    </div>
 
-  <div class="demo-wait">
-    <strong>DEMO: Pengarna kommer snart</strong>
-    <p>swish ankomst: <span id="arrival"></span></p>
-  </div>
+    <div class="details">
+      <div class="detail">
+        <span class="key">Telefonnummer</span>
+        <span class="value" id="phone">—</span>
+      </div>
+      <div class="detail">
+        <span class="key">Meddelande</span>
+        <span class="value" id="message">Inget meddelande</span>
+      </div>
+      <div class="detail">
+        <span class="key">Status</span>
+        <span class="value">DEMO · Ej betald</span>
+      </div>
+    </div>
 
-  <div class="row">
-    <span>Telefonnummer</span>
-    <span id="phone"></span>
-  </div>
+    <div class="warning">DEMO — INGEN RIKTIG BETALNING HAR GJORTS</div>
 
-  <div class="row">
-    <span>Meddelande</span>
-    <span id="message"></span>
-  </div>
-
-  <div class="notice">
-    Sweden — Swish certified
-  </div>
-
-  <button onclick="location.href='index.html'">
-    ← Tillbaka
-  </button>
+    <button class="back" type="button" onclick="window.location.href='./index.html'">← Tillbaka</button>
+    <div class="small">Swish Mini · Inofficiell testversion</div>
+  </section>
 </main>
 
 <script>
-const params = new URLSearchParams(location.search);
-const amount = Number(params.get("amount"));
-const phone = params.get("phone") || "Inte angivet";
-const message = params.get("message") || "Inget meddelande";
+const params = new URLSearchParams(window.location.search);
 
+const rawAmount = params.get("amount") || "";
+const amount = Number(rawAmount);
 document.getElementById("amount").textContent =
-  Number.isFinite(amount) && amount > 0 && amount <= 10000
+  rawAmount && Number.isFinite(amount) && amount > 0
     ? amount.toLocaleString("sv-SE") + " kr"
-    : "Ogiltigt belopp";
+    : "— kr";
 
-document.getElementById("phone").textContent = phone;
-document.getElementById("message").textContent = message;
+document.getElementById("phone").textContent =
+  (params.get("phone") || "—").slice(0, 40);
 
-const now = new Date();
+document.getElementById("message").textContent =
+  (params.get("message") || "Inget meddelande").slice(0, 120);
 
 document.getElementById("date").textContent =
-  now.toLocaleString("sv-SE");
-
-const arrival = new Date(
-  now.getTime() +
-  (5 + Math.floor(Math.random() * 56)) * 60000
-);
-
-document.getElementById("arrival").textContent =
-  arrival.toLocaleString("sv-SE", {
+  new Date().toLocaleString("sv-SE", {
+    year: "numeric",
+    month: "long",
     day: "numeric",
-    month: "short",
     hour: "2-digit",
     minute: "2-digit"
-  }) + " (DEMO)";
+  }) + " · DEMO";
 </script>
 </body>
 </html>
-
