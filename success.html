@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Demo-bekräftelse</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#fff;color:#171717}
+.banner{
+ background:linear-gradient(120deg,#b7ef68,#389b4e);
+ color:white;text-align:center;padding:55px 20px 65px;
+ border-radius:0 0 50% 8%;
+}
+.demo{font-size:13px;font-weight:bold;letter-spacing:1px}
+.check{font-size:65px;margin:20px 0}
+h1{font-size:25px}
+main{max-width:440px;margin:auto;padding:24px}
+.date{text-align:center;color:#888;font-size:14px;margin:10px 0 50px}
+.amount{text-align:center;font-size:42px;font-weight:bold;margin-bottom:55px}
+.row{display:flex;justify-content:space-between;gap:15px;padding:16px 0;border-top:1px solid #eee;overflow-wrap:anywhere}
+.row span:last-child{text-align:right;overflow-wrap:anywhere}
+.notice{background:#fff4d8;color:#684900;border-radius:12px;padding:14px;text-align:center;font-weight:bold;font-size:13px;margin-top:28px}
+button{width:100%;margin-top:18px;padding:15px;background:#202820;color:white;border:0;border-radius:12px;font-size:16px}
+</style>
+</head>
+<body>
+<div class="banner">
+  <div class="demo">SWISH MINI · DEMO</div>
+  <div class="check">✓</div>
+  <h1>Demo-bekräftelse</h1>
+  <p>Detta är en simulering</p>
+</div>
+<main>
+  <p class="date" id="date"></p>
+  <div class="amount" id="amount"></div>
+  <div class="row"><span>Telefonnummer</span><span id="phone"></span></div>
+  <div class="row"><span>Meddelande</span><span id="message"></span></div>
+  <div class="notice">DEMO — INGEN RIKTIG BETALNING HAR GJORTS</div>
+  <button onclick="location.href='index.html'">← Tillbaka</button>
+</main>
+<script>
+const p = new URLSearchParams(location.search);
+const amount = Number(p.get("amount"));
+const phone = p.get("phone") || "";
+const message = p.get("message") || "Inget meddelande";
+
+document.getElementById("amount").textContent =
+  Number.isFinite(amount) && amount > 0 && amount <= 10000
+  ? amount.toLocaleString("sv-SE") + " kr"
+  : "Ogiltigt belopp";
+
+document.getElementById("phone").textContent = phone;
+document.getElementById("message").textContent = message;
+document.getElementById("date").textContent =
+  new Date().toLocaleString("sv-SE");
+</script>
+</body>
+</html>
