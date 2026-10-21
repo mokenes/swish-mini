@@ -4,78 +4,182 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Swished</title>
+<title>Swish – Demo</title>
+
 <style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#fff;color:#171717}
-.banner{
- background:linear-gradient(120deg,#b7ef68,#389b4e);
- color:white;text-align:center;padding:55px 20px 65px;
- border-radius:0 0 50% 8%;
+* {
+  box-sizing: border-box;
 }
-.demo{font-size:13px;font-weight:bold;letter-spacing:1px}
-.check{font-size:65px;margin:20px 0}
-h1{font-size:25px}
-main{max-width:440px;margin:auto;padding:24px}
-.date{text-align:center;color:#888;font-size:14px;margin:10px 0 50px}
-.amount{text-align:center;font-size:42px;font-weight:bold;margin-bottom:55px}
-.row{display:flex;justify-content:space-between;gap:15px;padding:16px 0;border-top:1px solid #eee;overflow-wrap:anywhere}
-.row span:last-child{text-align:right;overflow-wrap:anywhere}
-.notice{background:#fff4d8;color:#684900;border-radius:12px;padding:14px;text-align:center;font-weight:bold;font-size:13px;margin-top:28px}
-button{width:100%;margin-top:18px;padding:15px;background:#202820;color:white;border:0;border-radius:12px;font-size:16px}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #fff;
+  color: #171717;
+}
+
+.banner {
+  background: linear-gradient(120deg, #b7ef68, #389b4e);
+  color: white;
+  text-align: center;
+  padding: 45px 20px 55px;
+  border-radius: 0 0 35px 35px;
+}
+
+.demo-label {
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.check {
+  font-size: 60px;
+  margin: 15px 0;
+}
+
+h1 {
+  font-size: 27px;
+  margin: 8px 0;
+}
+
+main {
+  max-width: 440px;
+  margin: auto;
+  padding: 24px;
+}
+
+.date {
+  text-align: center;
+  color: #888;
+  font-size: 14px;
+  margin: 10px 0 35px;
+}
+
+.amount {
+  text-align: center;
+  font-size: 42px;
+  font-weight: bold;
+  margin-bottom: 18px;
+}
 
 .demo-wait {
   text-align: center;
-  margin: 20px 0 35px;
-  color: #666;
+  margin: 0 0 35px;
+  padding: 18px 12px;
+  background: #f0f8ed;
+  border-radius: 14px;
+  color: #315c30;
 }
 
 .demo-wait strong {
   display: block;
-  font-size: 19px;
+  font-size: 20px;
   font-weight: 800;
-  color: #333;
 }
 
 .demo-wait p {
   font-size: 14px;
-  margin-top: 10px;
+  margin: 10px 0 0;
 }
-</style> 
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 16px 0;
+  border-top: 1px solid #eee;
+  overflow-wrap: anywhere;
+}
+
+.row span:last-child {
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+.notice {
+  background: #fff4d8;
+  color: #684900;
+  border-radius: 12px;
+  padding: 14px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 13px;
+  margin-top: 28px;
+}
+
+button {
+  width: 100%;
+  margin-top: 18px;
+  padding: 15px;
+  background: #202820;
+  color: white;
+  border: 0;
+  border-radius: 12px;
+  font-size: 16px;
+  cursor: pointer;
+}
+</style>
 </head>
+
 <body>
 <div class="banner">
-  <div class="demo">SWISH · Sweden </div>
+  <div class="demo-label">SWISH</div>
   <div class="check">✓</div>
-  <h1>Swish</h1>
+  <h1>Swish-bekräftelse</h1>
+  <p> betalning</p>
 </div>
+
 <main>
- <div class="demo-wait">
-  <strong>DEMO: Pengarna kommer snart</strong>
-  <p>Sweden certified: <span id="arrival"></span></p>
-</div>
-  <div class="row"><span>Telefonnummer</span><span id="phone"></span></div>
-  <div class="row"><span>Meddelande</span><span id="message"></span></div>
-  <button onclick="location.href='index.html'">← Tillbaka</button>
+  <p class="date" id="date"></p>
+
+  <div class="amount" id="amount">0 kr</div>
+
+  <div class="demo-wait">
+    <strong>DEMO: Pengarna kommer snart</strong>
+    <p>swish ankomst: <span id="arrival"></span></p>
+  </div>
+
+  <div class="row">
+    <span>Telefonnummer</span>
+    <span id="phone"></span>
+  </div>
+
+  <div class="row">
+    <span>Meddelande</span>
+    <span id="message"></span>
+  </div>
+
+  <div class="notice">
+    Sweden — Swish certified
+  </div>
+
+  <button onclick="location.href='index.html'">
+    ← Tillbaka
+  </button>
 </main>
+
 <script>
-const p = new URLSearchParams(location.search);
-const amount = Number(p.get("amount"));
-const phone = p.get("phone") || "";
-const message = p.get("message") || "Inget meddelande";
+const params = new URLSearchParams(location.search);
+const amount = Number(params.get("amount"));
+const phone = params.get("phone") || "Inte angivet";
+const message = params.get("message") || "Inget meddelande";
 
 document.getElementById("amount").textContent =
   Number.isFinite(amount) && amount > 0 && amount <= 10000
-  ? amount.toLocaleString("sv-SE") + " kr"
-  : "Ogiltigt belopp";
+    ? amount.toLocaleString("sv-SE") + " kr"
+    : "Ogiltigt belopp";
 
 document.getElementById("phone").textContent = phone;
 document.getElementById("message").textContent = message;
+
+const now = new Date();
+
 document.getElementById("date").textContent =
-  new Date().toLocaleString("sv-SE");
-const arrival = new Date();
-arrival.setMinutes(
-  arrival.getMinutes() + 5 + Math.floor(Math.random() * 56)
+  now.toLocaleString("sv-SE");
+
+const arrival = new Date(
+  now.getTime() +
+  (5 + Math.floor(Math.random() * 56)) * 60000
 );
 
 document.getElementById("arrival").textContent =
