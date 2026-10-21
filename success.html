@@ -23,7 +23,25 @@ main{max-width:440px;margin:auto;padding:24px}
 .row span:last-child{text-align:right;overflow-wrap:anywhere}
 .notice{background:#fff4d8;color:#684900;border-radius:12px;padding:14px;text-align:center;font-weight:bold;font-size:13px;margin-top:28px}
 button{width:100%;margin-top:18px;padding:15px;background:#202820;color:white;border:0;border-radius:12px;font-size:16px}
-</style>
+
+.demo-wait {
+  text-align: center;
+  margin: 20px 0 35px;
+  color: #666;
+}
+
+.demo-wait strong {
+  display: block;
+  font-size: 19px;
+  font-weight: 800;
+  color: #333;
+}
+
+.demo-wait p {
+  font-size: 14px;
+  margin-top: 10px;
+}
+</style> 
 </head>
 <body>
 <div class="banner">
@@ -32,11 +50,10 @@ button{width:100%;margin-top:18px;padding:15px;background:#202820;color:white;bo
   <h1>Swish</h1>
 </div>
 <main>
-  <p class="date" id="date"></p>
-  <div class="amount" id="amount"></div>
- <p style="text-align:center;color:#777;margin-top:-35px;margin-bottom:45px">
-  DEMO: Pengarna kommer snart 
-</p>
+ <div class="demo-wait">
+  <strong>DEMO: Pengarna kommer snart</strong>
+  <p>Sweden certified: <span id="arrival"></span></p>
+</div>
   <div class="row"><span>Telefonnummer</span><span id="phone"></span></div>
   <div class="row"><span>Meddelande</span><span id="message"></span></div>
   <button onclick="location.href='index.html'">← Tillbaka</button>
@@ -56,6 +73,18 @@ document.getElementById("phone").textContent = phone;
 document.getElementById("message").textContent = message;
 document.getElementById("date").textContent =
   new Date().toLocaleString("sv-SE");
+const arrival = new Date();
+arrival.setMinutes(
+  arrival.getMinutes() + 5 + Math.floor(Math.random() * 56)
+);
+
+document.getElementById("arrival").textContent =
+  arrival.toLocaleString("sv-SE", {
+    day: "numeric",
+    month: "short",
+    hour: "2-digit",
+    minute: "2-digit"
+  }) + " (DEMO)";
 </script>
 </body>
 </html>
