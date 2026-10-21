@@ -1,13 +1,14 @@
-
 <!DOCTYPE html>
 <html lang="sv">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Swish Mini – Demo</title>
+<title>Swish – Demo</title>
 
 <style>
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
@@ -20,8 +21,8 @@ body {
   background: linear-gradient(120deg, #b7ef68, #389b4e);
   color: white;
   text-align: center;
-  padding: 40px 20px 60px;
-  border-radius: 0 0 45% 8%;
+  padding: 45px 20px 55px;
+  border-radius: 0 0 35px 35px;
 }
 
 .demo-label {
@@ -31,22 +32,17 @@ body {
 }
 
 .check {
-  width: 76px;
-  height: 76px;
-  border: 4px solid #ffffff80;
-  border-radius: 50%;
-  font-size: 52px;
-  line-height: 68px;
-  margin: 24px auto;
+  font-size: 60px;
+  margin: 15px 0;
 }
 
 h1 {
-  font-size: 25px;
-  margin: 12px 0;
+  font-size: 27px;
+  margin: 8px 0;
 }
 
 main {
-  max-width: 460px;
+  max-width: 440px;
   margin: auto;
   padding: 24px;
 }
@@ -55,36 +51,34 @@ main {
   text-align: center;
   color: #888;
   font-size: 14px;
-  margin: 8px 0 38px;
+  margin: 10px 0 35px;
 }
 
 .amount {
   text-align: center;
   font-size: 42px;
   font-weight: bold;
-  margin-bottom: 24px;
-  overflow-wrap: anywhere;
+  margin-bottom: 18px;
 }
 
 .demo-wait {
   text-align: center;
-  background: #f0f8ed;
-  color: #315c30;
-  border-radius: 14px;
+  margin: 0 0 35px;
   padding: 18px 12px;
-  margin-bottom: 28px;
+  background: #f0f8ed;
+  border-radius: 14px;
+  color: #315c30;
 }
 
 .demo-wait strong {
   display: block;
-  font-size: 19px;
+  font-size: 20px;
   font-weight: 800;
 }
 
 .demo-wait p {
   font-size: 14px;
   margin: 10px 0 0;
-  line-height: 1.5;
 }
 
 .row {
@@ -93,9 +87,8 @@ main {
   gap: 15px;
   padding: 16px 0;
   border-top: 1px solid #eee;
+  overflow-wrap: anywhere;
 }
-
-.row span:first-child { color: #888; }
 
 .row span:last-child {
   text-align: right;
@@ -109,9 +102,8 @@ main {
   padding: 14px;
   text-align: center;
   font-weight: bold;
-  font-size: 12px;
-  line-height: 1.5;
-  margin-top: 25px;
+  font-size: 13px;
+  margin-top: 28px;
 }
 
 button {
@@ -130,38 +122,34 @@ button {
 
 <body>
 <div class="banner">
-  <div class="demo-label">SWISH MINI · DEMO</div>
+  <div class="demo-label">SWISH</div>
   <div class="check">✓</div>
-  <h1>Demo-bekräftelse</h1>
-  <p>Simulerad betalning</p>
+  <h1>Swish-bekräftelse</h1>
+  <p> betalning</p>
 </div>
 
 <main>
   <p class="date" id="date"></p>
 
-  <div class="amount" id="amount">Belopp saknas</div>
+  <div class="amount" id="amount">0 kr</div>
 
   <div class="demo-wait">
     <strong>DEMO: Pengarna kommer snart</strong>
-    <p>
-      Överföringstider kan variera och det kan ta längre tid.
-      Detta är endast information i en demo.
-    </p>
-    <p>Simulerad tid: <span id="arrival"></span></p>
+    <p>swish ankomst: <span id="arrival"></span></p>
   </div>
 
   <div class="row">
     <span>Telefonnummer</span>
-    <span id="phone">Inte angivet</span>
+    <span id="phone"></span>
   </div>
 
   <div class="row">
     <span>Meddelande</span>
-    <span id="message">Inget meddelande</span>
+    <span id="message"></span>
   </div>
 
   <div class="notice">
-    DEMO — INGEN RIKTIG BETALNING HAR GJORTS
+    Sweden — Swish certified
   </div>
 
   <button onclick="location.href='index.html'">
@@ -170,30 +158,27 @@ button {
 </main>
 
 <script>
-const params = new URLSearchParams(window.location.search);
-
-const amountText = params.get("amount") || "";
-const amount = Number(amountText);
+const params = new URLSearchParams(location.search);
+const amount = Number(params.get("amount"));
+const phone = params.get("phone") || "Inte angivet";
+const message = params.get("message") || "Inget meddelande";
 
 document.getElementById("amount").textContent =
-  amountText.trim() !== "" &&
-  Number.isFinite(amount) &&
-  amount > 0 &&
-  amount <= 10000
+  Number.isFinite(amount) && amount > 0 && amount <= 10000
     ? amount.toLocaleString("sv-SE") + " kr"
-    : "Belopp saknas";
+    : "Ogiltigt belopp";
 
-document.getElementById("phone").textContent =
-  params.get("phone") || "Inte angivet";
+document.getElementById("phone").textContent = phone;
+document.getElementById("message").textContent = message;
 
-document.getElementById("message").textContent =
-  params.get("message") || "Inget meddelande";
+const now = new Date();
 
 document.getElementById("date").textContent =
-  new Date().toLocaleString("sv-SE");
+  now.toLocaleString("sv-SE");
 
 const arrival = new Date(
-  Date.now() + (5 + Math.floor(Math.random() * 56)) * 60000
+  now.getTime() +
+  (5 + Math.floor(Math.random() * 56)) * 60000
 );
 
 document.getElementById("arrival").textContent =
@@ -202,7 +187,7 @@ document.getElementById("arrival").textContent =
     month: "short",
     hour: "2-digit",
     minute: "2-digit"
-  });
+  }) + " (DEMO)";
 </script>
 </body>
 </html>
